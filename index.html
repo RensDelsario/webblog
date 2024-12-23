@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Page</title>
+    <style>
+        body{
+            background-image: url(kupas.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .blog-posts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            
+        }
+
+        article {
+            margin: 10px;
+            width: 20%;
+            padding: 10px;
+            border: 2px solid #330202;
+            box-shadow: -28px 3px 105px 3px rgba(0,0,0,1) inset,
+            0px 2px 31px -13px rgba(0,0,0,1) inset,
+            0px -2px 74px 255px rgba(0,0,0,0.25) inset;
+        }
+
+        article img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        article h2 {
+            font-size: 20px;
+            text-align: center;
+            color: #ccc;
+            margin-top: 0;
+        }
+
+        article p {
+
+            color: #f87878;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            font-family: "Arial, sans-serif";
+            font-size: 17px;
+            font-weight: lighter;
+            font-variant: small-caps;
+            text-transform: capitalize;
+            letter-spacing: 1px;
+            word-spacing: 0px;
+            text-shadow: 1px 1px #571717;
+        }
+        
+        .slideshow-container {
+            position: relative;
+            max-width: 400px;
+            margin: auto;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .slideshow {
+            display: flex;
+            transition: transform 0.9s ease;
+            width: 100%; 
+            height: 100%;
+        }
+        .slide {
+            min-width: 100%;
+            transition: opacity 1s ease;
+        }
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(102, 40, 40, 0.5);
+            color: rgb(0, 0, 0);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+
+        h1{
+            font-size: 40px;
+            color: rgb(110, 67, 57);
+            text-shadow: 1px 1px#ffffff;
+        }
+        
+        .image-buttons {
+            display: flex;
+            margin: 20px;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .image-button {
+            width: 300px;
+            height: 400px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .image-button:hover {
+            transform: scale(1.1);
+        }
+
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-modal video {
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+        #demoFont {
+            margin: 20px;
+            font-family: Georgia, serif;
+            font-size: 24px;
+            letter-spacing: -0.4px;
+            word-spacing: -2.4px;
+            color: #c72222;
+            font-weight: 400;
+            text-decoration: none;
+            font-style: normal;
+            font-variant: small-caps;
+            text-transform: capitalize;
+        }
+
+        .horror-text {
+          animation-duration: 1.5s;
+          animation-iteration-count: infinite;
+          animation-name: flickering;
+          animation-timing-function: step-start;
+          color: #410f05;
+          font-family: 'UnifrakturCook', cursive;
+          text-align: center;
+          font-size: 40px;
+        }
+
+        @keyframes flickering {
+          0% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          5% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          10% {
+            color: #4b170d;
+            text-shadow: 1px 1px #311515;
+            transform: skewX(-15deg); 
+          }
+          15% {
+            color: #3d0f0f;
+            text-shadow: none;
+            transform: skewX(-15deg);
+          }
+          20% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          25% {
+            color: #3a0d0d;
+            text-shadow: 2px 2px #4b170d;
+            transform: skewX(0);
+          }
+          30% {
+            color: #521515;
+            text-shadow: 2px 2px #4b170d;
+            transform: skewX(0);
+          }
+          35% {
+            color: #ccc;
+            text-shadow: 2px 2px #4b170d;
+            transform: skewX(0);
+          }
+          37% {
+            color: #ccc;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(0);
+          }
+          40% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(0);
+          }
+          45% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(0);
+          }
+          50% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          55% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          60% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          65% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          68% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(0);
+          }
+          70% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(0);
+          }
+          75% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(10deg);
+          }
+          80% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(10deg);
+          }
+          85% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(10deg);
+          }
+          90% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+          95% {
+            color: #4b170d;
+            text-shadow: 1px 1px #eee;
+            transform: skewX(0);
+          }
+          100% {
+            color: #4b170d;
+            text-shadow: none;
+            transform: skewX(0);
+          }
+        }
+        .container {
+            text-align: center;
+        }
+
+        .icon-button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            color: white;
+            background-color: #410a0d;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background-color 0.3s, transform 0.3s; 
+        }
+
+        .icon-button:hover {
+            background-color: #550b0b;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blog Page</h1>
+    </header>
+    
+    <section class="blog-posts">
+        <article>
+            <h2>Damien Leone's</h2>
+            <img src="Damien Leone.png" alt="Damien Leone">
+            <p>Damien Leone is an American filmmaker, film editor, and special effects artist. He is best known for writing and directing All Hallows' Eve (2013), Terrifier (2016), Terrifier 2 (2022), and Terrifier 3 (2024), each of which feature his character Art the Clown.[1]</p>
+        </article>
+        <article>
+            <h2>Amadeu Artasona's</h2>
+            <img src="Amadeu Artasona.png" alt="Amadeu Artasona">
+            <p>Friends approach a quiet town to find help, and the few residents they find warn them to be quiet. After several of the friends are killed, the rest learn they must be silent to escape alive.</p>
+        </article>
+        <article>
+            <h2>Spenser Cohen's</h2>
+            <img src="Spenser Cohen.png" alt="Spenser Cohen">
+            <p>Tarot is a 2024 American supernatural horror film written and directed by Spenser Cohen and Anna Halberg, in their feature film directorial debuts, based on the 1992 novel Horrorscope by Nicholas Adams. The film stars Harriet Slater, Adain Bradley, Avantika, Wolfgang Novogratz, Humberly González, Larsen Thompson, and Jacob Batalon as a group of college students who, after using a strange Tarot deck, begin to gruesomely die one by one. Olwen Fouéré co-stars.</p>
+        </article>
+        <article>
+            <h2>Parker J. Finn's</h2>
+            <img src="Parker J. Finn.png" alt="Parker J. Finn">
+            <p>Parker J. Finn (born March 18, 1987) is an American filmmaker. He is the director and writer of the horror-thriller films Smile (2022) and its sequel Smile 2 (2024).</p>
+        </article>
+    </section>
+
+    <section class="slideshow-container">
+      <div class="slideshow">
+          <img class="slide" src="don_t_speak.png" alt="Image 1">
+          <img class="slide" src="tarot1.png" alt="Image 2">
+          <img class="slide" src="Smile.png" alt="Image 3">
+          <img class="slide" src="terrifier.png" alt="Image 3">
+      </div>
+      <button class="prev" onclick="prevSlide()">&#10094;</button>
+      <button class="next" onclick="nextSlide()">&#10095;</button>
+  </section>
+
+
+  <div class="center">
+    <h1 class="horror-text">Click the Image to Watch the trailer Video</h1>
+  </div>
+  <div class="image-buttons">
+      <img src="don_t_speak.png" alt="Image 1" class="image-button" data-video="don_t_speak.mp4">
+      <img src="tarot1.png" alt="Image 2" class="image-button" data-video="Tarot.mp4">
+      <img src="Smile.png" alt="Image 3" class="image-button" data-video="Smile.mp4">
+      <img src="terrifier.png" alt="Image 3" class="image-button" data-video="Terrifier.mp4">
+  </div>
+
+  <div class="video-modal" id="videoModal">
+      <span class="close" id="closeModal">&times;</span>
+      <video id="videoPlayer" controls autoplay>
+          <source id="videoSource" src="" type="video/mp4">
+      </video>
+  </div>
+
+  <div class="container">
+    <h1>Movie Links</h1>
+    <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.facebook.com/100068094444899/videos/dont-speak-2020/521061499031185/&ved=2ahUKEwin3aOlhqeKAxWTr1YBHUuVGE84ChC4AnoECAkQAQ&usg=AOvVaw3nsgJlm7JZEqqF5PKqZ3md" class="icon-button" target="_blank">
+        🎬 Dont speak
+    </a>
+    <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.youtube.com/watch%3Fv%3D3-WywwGxH94&ved=2ahUKEwi3vPKcg6eKAxXU6DQHHe3HJ94QuAJ6BAgQEAE&usg=AOvVaw35WZFU_QvGbQ3kcxGNpYN_" class="icon-button" target="_blank">
+        🎬 Tarot
+    </a>
+    <a href="https://www.imdb.com/title/tt1375666/" class="icon-button" target="_blank">
+        🎬 Smile
+    </a>
+    <a href="https://www.imdb.com/title/tt1375666/" class="icon-button" target="_blank">
+        🎬 Terrifier
+    </a>
+</div>
+    
+    <script >
+      let currentIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        function showSlide(index) {
+            const offset = -index * 100; 
+            document.querySelector('.slideshow').style.transform = `translateX(${offset}%)`;
+        }
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentIndex);
+        }
+        showSlide(currentIndex);
+        setInterval(nextSlide, 5000);
+        
+        document.querySelectorAll('.image-button').forEach(button => {
+        button.addEventListener('click', function() {
+        const videoSrc = this.getAttribute('data-video');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoSource = document.getElementById('videoSource');
+        const videoModal = document.getElementById('videoModal');
+
+        videoSource.src = videoSrc;
+        videoPlayer.load();
+        videoPlayer.play(); 
+        videoModal.style.display = 'flex';
+            });
+        });
+
+            document.getElementById('closeModal').addEventListener('click', function() {
+            const videoModal = document.getElementById('videoModal');
+            videoModal.style.display = 'none';
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0; 
+        });
+    </script>
+</body>
+</html>
